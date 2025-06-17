@@ -1,0 +1,82 @@
+TO RUN SONEARQUBE AS A SERVICE
+
+> sudo adduser --system --no-create-home --disabled-login --group sonar
+> cat /etc/passwd
+> mv sonarqube-25.6.0.109173 sonarqube
+> ls
+> sudo mv sonarqube /opt/
+> cd /opt/
+> ls -l
+> sudo chown -R sonar:sonar /opt/sonarqube/
+> ls -l
+> cd sonarqube/
+> ls -l
+> cd /etc/systemd/system
+> ls
+> sudo nano sonarqube.service
+> sudo systemctl daemon-reload
+> sudo systemctl enable sonarqube
+> sudo systemctl start sonarqube
+> sudo systemctl status sonarqube 
+
+
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+
+User=sonar
+Group=sonar
+Restart=always
+
+[Install]
+WantedBy=multi-user.target 
+
+
+
+
+TO RUN NEXUS AS A SERVICE
+
+
+> sudo adduser --system --no-create-home --disabled-login --group nexus
+> cat /etc/passwd
+> tar -xvf nexus-3.81.1-01-linux-x86_64.tar.gz
+> mv nexus-3.81.1-01 nexus3
+> sudo mkdir /opt/nexus
+> mv nexus3 /opt/nexus
+> mv sonatype-work /opt/nexus
+> cd /opt/
+> ls -l
+> sudo chown -R nexus:nexus /opt/nexus/
+> ls -l
+> cd sonarqube/
+> ls -l
+> cd /etc/systemd/system
+> ls
+> sudo nano nexus.service
+> sudo systemctl daemon-reload
+> sudo systemctl enable sonarqube
+> sudo systemctl start sonarqube
+> sudo systemctl status sonarqube 
+
+[Unit]
+Description=Nexus service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+ExecStart=/opt/nexus/nexus3/bin/nexus start
+ExecStop=/opt/nexus/nexus3/bin/nexus stop
+
+User=nexus
+Group=nexus
+Restart=always
+
+[Install]
+WantedBy=multi-user.target 
