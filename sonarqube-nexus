@@ -1,4 +1,4 @@
-TO RUN SONEARQUBE AS A SERVICE
+<<<<<<<<<TO RUN SONEARQUBE AS A SERVICE>>>>>>>>>>>>
 
 > sudo adduser --system --no-create-home --disabled-login --group sonar
 > cat /etc/passwd
@@ -40,8 +40,7 @@ WantedBy=multi-user.target
 
 
 
-TO RUN NEXUS AS A SERVICE
-
+<<<<<<<<<TO RUN NEXUS AS A SERVICE>>>>>>>>>>>>
 
 > sudo adduser --system --no-create-home --disabled-login --group nexus
 > cat /etc/passwd
@@ -64,6 +63,7 @@ TO RUN NEXUS AS A SERVICE
 > sudo systemctl start sonarqube
 > sudo systemctl status sonarqube 
 
+
 [Unit]
 Description=Nexus service
 After=syslog.target network.target
@@ -79,4 +79,16 @@ Group=nexus
 Restart=always
 
 [Install]
-WantedBy=multi-user.target 
+WantedBy=multi-user.target
+
+
+<<<TO DEPLOY BUILD TO NEXUS>>>
+
+> cd ~
+> ls -a
+> cd .m2/
+> nano settings.xml
+> cd ~
+> cd spring-petclinic/
+> nano pom.xml 
+> mvn deploy -Dcheckstyle.skip=true
